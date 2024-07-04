@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import './App.css'
 import Dashboard from './views/Dashboard/Dashboard';
-import Home from './views/Home/Home'
+import Login from './views/LoginView/Login'
 import RegisterView from './views/Register/RegisterView';
 import ScheduleApp from './components/ScheduleApp/ScheduleApp';
 import About from './components/About/About';
+import Home from './views/Home/Home';
+import Navbar from './components/Navbar/Navbar';
+
+
 
 function App() {
 
@@ -15,13 +19,21 @@ function App() {
     "user":{}
   });
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (userCreds) =>{ 
     const URL = `http://localhost:3000/users/login`;
     axios.post(URL, userCreds).then(resp=>{
-      setUserData(resp.data) 
-      navigate("dashboard")
-    }).catch(err=>{
+      // localStorage.setItelocalStorage.setItem("isAutentic", true);
+      if(resp.status===200){
+        setUserData(resp.data)
+        navigate("/dashboard")
+        sessionStorage.setItem("isAutentic", resp.data.user.id);
+        console.log(resp);
+      } else {
+        alert('Bad Credentials')
+      }
+    }).catch((err)=>{
       alert('Bad Credentials')
     });
   }
@@ -31,15 +43,21 @@ function App() {
       "login": false,
       "user":{}
     });
+    sessionStorage.removeItem("isAutentic");
     navigate("/");
   }
-
+  
   return (
     <>
+      {location.pathname !== "/login" && <Navbar onLogout={onLogout} />}
       <Routes>
-        {/* LANDING/LOGIN */}
+        {/* HOME */}
         <Route path="/" exact element={
-          <Home handleLogin={handleLogin} userId={userData.user.id}/>
+          <Home/>
+        }/>
+        {/* LANDING/LOGIN */}
+        <Route path="/login" exact element={
+          <Login handleLogin={handleLogin} userId={userData.user.id}/>
         }/>
         {/* REGISTER */}
         <Route path="/register" element={
@@ -59,6 +77,7 @@ function App() {
         }/>
         {/* APP DETAIL */}
         {/* CONTACT */}
+        
       </Routes>
     </>
   )

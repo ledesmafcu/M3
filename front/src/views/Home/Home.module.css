@@ -1,11 +1,5 @@
-/*Colors:
-#fb7832
-#CCCCCC
-*/
-.main{
+.container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding-left: 10%;
-    background-color: #CCCCCC;
-
 }

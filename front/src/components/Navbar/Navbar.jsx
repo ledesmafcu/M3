@@ -10,14 +10,13 @@ function Navbar({onLogout}) {
                 <img src="../../../../public/logo.svg" alt="Logo" className={logoImg} />
                 <h2 className={logoText}>Dra. Ferraggine</h2>
             </div>
-            <a className={navLink} href="#">
-                {/* <img src="/docs/4.6/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""/> */}
+            <Link className={navLink} to="/">
                 Inicio 
-            </a>
-            <Link className={navLink} to="/schedule">
+            </Link>
+            <Link className={navLink} to="/dashboard">
                 Turnos
             </Link>
-            <Link className={navLink} to="/about">
+            <Link className={navLink} to="/contact">
                 Contacto
             </Link>
             <a className={navLink} href="#" onClick={onLogout}>
