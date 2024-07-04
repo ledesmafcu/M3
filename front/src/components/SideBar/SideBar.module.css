@@ -1,0 +1,23 @@
+.sideBar{
+    background-color: #CCCCCC;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bigLogo{
+    width: 35%;
+    margin-bottom: 1px;
+}
+
+.titleLog{
+    font-size: 28px;
+    color: #fb7832;
+}

@@ -1,0 +1,11 @@
+/*Colors:
+#fb7832
+#CCCCCC
+*/
+.main{
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    background-color: #CCCCCC;
+
+}
